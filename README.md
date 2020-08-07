@@ -6,7 +6,9 @@
 
 * Python 3.7.
 * Django >3.
-* crispy_forms for form styling
+* crispy_forms for form styling.
+* BootStrap, jquery.
+* Ajax for like and dislike operation.
 
 ### Installation
 * make virtual environment and activate virctual environment 
@@ -29,5 +31,13 @@
   ```
  Note: If the admin creates a user from the administration site, make sure that the profile of that user is also created from the administration site.
  
- Screenshot
+ ## Screenshot
+ ### homepage
+ ![home page](readMe_files/homepage.png)
  
+ 
+ ### Song
+ ![song](readMe_files/song.png)
+ 
+ ### PlayList
+ ![playlist](readMe_files/playlist.png)
