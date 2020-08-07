@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} User home
+{% endblock title %}
+{% block content %}
+
+<div class="card bg-white container  mt-5 pt-2">
+	<form method="POST">
+		<fieldset class="form-group">
+			<legend class="border_bottom md-4">Log In</legend>
+			{{ form|crispy }}
+		</fieldset>
+		<div class="form-group">
+			<button class="btn btn-outline-info" type="submit"> Login</button>
+		</div>
+		{% csrf_token %}
+	</form>
+	<div class="form-inline">
+		<a class="nav-link" href="{% url 'user:password_reset' %}"> Forgotten Password </a>
+		or don't have any account
+		<a class="nav-link" href="{% url 'user:register' %}"> Sign up </a>
+	</div>
+</div>
+<!-- active login link-->
+<script>
+	var user_login = document.getElementById("user_login");
+	user_login.classList.add("active");
+</script>
+{% endblock content %}

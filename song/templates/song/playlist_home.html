@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} PlayLists
+{% endblock title %}
+{% block content %}
+
+<div class="card-container row">
+    {% for playlist in playlists %}
+    <a href={{playlist.get_absolute_url}} class="card m-4 p-2" style="text-decoration: none;">
+        <div class="">
+            <img class="card-img-top" src="{{playlist.cover_image.url}}" alt="no cover image" style="height: 300px;">
+            <h5 class="text-center"> {{playlist.title|title}} by {{ playlist.owner.username }}</h5>
+
+        </div>
+    </a>
+    {% endfor %}
+
+</div>
+{% if search_text %}
+<div class="container row">
+    {% include "pagination.html" with page=page_obj %}
+</div>
+{% else %}
+<div class="container row">
+    {% include "pagination.html" with page=page_obj %}
+</div>
+{% endif %}
+
+<script>
+    var link = document.getElementById("user_playlist");
+    link.classList.add("active");
+</script>
+{% endblock content %}

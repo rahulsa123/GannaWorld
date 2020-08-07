@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} User home
+{% endblock title %}
+{% block content %}
+
+<div class="container pt-4 pb-2 pl-2 ">
+    <div class="container-fluild row ml-2 mr-2">
+        <div class="media-body">
+            <h2 class="account-heading">{{user.username}}</h2>
+            <p class="text-secondary">{{user.email}}</p>
+        </div>
+        <img class="img-fluid img-thumbnail" alt="default.png" src="{{ user.profile.image.url }}">
+    </div>
+    <div class="container-fluild">
+        <form method="POST" enctype="multipart/form-data">
+            <fieldset class="form-group">
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit"> Edit</button>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+    <!-- active login link-->
+    <script>
+        var user_profile = document.getElementById("user_profile");
+        user_profile.classList.add("active");
+    </script>
+    {% endblock content %}

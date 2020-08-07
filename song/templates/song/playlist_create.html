@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Add PlayList
+{% endblock title %}
+{% block content %}
+
+<div class="card bg-white container  mt-5 pt-2">
+    <form method="POST" enctype="multipart/form-data" autocomplete="off">
+        <fieldset class="form-group">
+            <legend class="border_bottom md-4">Add Playlist</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit"> add</button>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+<script>
+    var user_song_add = document.getElementById("user_playlist_add");
+    user_song_add.classList.add("active");
+</script>
+{% endblock content %}

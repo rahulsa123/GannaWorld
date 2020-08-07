@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block title %} Ganna World-home {% endblock title%}
+{% block content %} {% if search_text %}
+<h2 class="ml-4">searching "{{ search_text }}" ...</h2>
+{% endif %}
+
+<div style="container-fluid">
+  {% for song in songs %}
+  <div id="song_card">
+    <a href="{{song.get_absolute_url}}" class="card m-4 p-2">
+      <img
+        class="card-img-top"
+        src="{{song.cover_image.url}}"
+        alt="no cover image"
+        style="height: 300px;"
+      />
+      <h5 class="text-center">
+        {{song.title|title}} by {{ song.owner.username }}
+      </h5>
+      <audio
+        class=""
+        src="{{song.song_file.url}}"
+        controls
+        preload="none"
+        style="width: 100%;"
+      >
+        Your browser does not support the
+        <code>audio</code> element.
+      </audio>
+      <div class="text-center">
+        <img
+          src="/media/like.png"
+          class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+          alt=""
+        />
+        <span id="total_count pl-2">
+          {{song.user_likes.count}}
+        </span>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% if search_text %}
+<div class="container row">
+  {% include "pagination.html" with page=page_obj search=search_text %}
+</div>
+{% else %}
+<div class="container row">
+  {% include "pagination.html" with page=page_obj %}
+</div>
+{% endif %}
+
+<script>
+  var home = document.getElementById("home");
+  home.classList.add("active");
+</script>
+{% endblock content %}

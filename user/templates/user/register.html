@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} User home
+{% endblock title %}
+{% block content %}
+
+<div class="card bg-white container  mt-5 pt-2">
+    <form method="POST">
+        <fieldset class="form-group">
+            <legend class="border_bottom md-4">Sign up</legend>
+            {{ user_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit"> register</button>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+<script>
+    var user_login = document.getElementById("user_login");
+    user_login.classList.add("active"); 
+</script>
+
+
+
+{% endblock content %}

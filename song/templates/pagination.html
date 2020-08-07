@@ -1,0 +1,27 @@
+<div class="pagination">
+  {% if search %}
+    <span class="step-links">
+    {% if page.has_previous %}
+    <a class="btn btn-outline-success" href="?page={{ page.previous_page_number }}&search={{search}} ">Previous</a>
+    {% endif %}
+    <span class="btn">
+      Page {{ page.number }} of {{ page.paginator.num_pages }}.
+    </span>
+    {% if page.has_next %}
+    <a class="btn btn-outline-success" href="?page={{ page.next_page_number }}&search={{search}}">Next</a>
+    {% endif %}
+  </span>  
+  {% else %}
+  <span class="step-links">
+    {% if page.has_previous %}
+    <a class="btn btn-outline-success" href="?page={{ page.previous_page_number }} ">Previous</a>
+    {% endif %}
+    <span class="btn">
+      Page {{ page.number }} of {{ page.paginator.num_pages }}.
+    </span>
+    {% if page.has_next %}
+    <a class="btn btn-outline-success" href="?page={{ page.next_page_number }}">Next</a>
+    {% endif %}
+  {% endif %}
+  </span>
+</div>

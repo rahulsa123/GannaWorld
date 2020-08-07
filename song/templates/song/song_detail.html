@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %} {{song.title|truncatechars:20}} Song
+{% endblock title %}
+{% block content %}
+
+<div class="jumbotron m-5 bg-white text-center pt-4 pb-4">
+    <h1>{{song.title}} by {{song.owner.username}}</h1>
+    <div class="mt-2">
+        <img class="img-thumbnail rounded mx-auto d-block" src="{{song.cover_image.url}}" alt="no cover image">
+        <div class="mt-2">
+            <audio src="{{song.song_file.url}}" controls preload="none" style="width:100%;">
+                Your browser does not support the
+                <code>audio</code> element.
+            </audio>
+            <h6>Published Date : {{song.published}}</h6>
+
+            <!-- 
+                    Make like system
+
+
+            -->
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-outline-success" data-id="{{ song.id }}">
+                {% if request.user not in song.user_likes.all  %}
+                Like
+                {% else %}
+                Dislike
+                {% endif %}
+            </a>
+            {% endif %}
+
+            <img src="/media/like.png"
+                class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+            <span id="total_count">
+                {{song.user_likes.count}}
+            </span>
+        </div>
+    </div>
+</div>
+{% block domready %}
+<script>
+    $(document).ready(function () {
+        $("a.btn").click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'song:song_like' %}",
+                data: { "id": '{{song.pk}}' },
+                success: function (response) {
+                    $("a.btn").text(response.status);
+                    var previous_likes = parseInt($('#total_count').text());
+                    if (response.status == "Dislike") {
+                        // means user liked the song 
+                        $('#total_count').text(previous_likes + 1);
+                    }
+                    else if (response.status == "Like") {
+                        // means user disliked the song 
+                        $('#total_count').text(previous_likes - 1);
+                    }
+
+                },
+                error: function (response) {
+                    console.log(response.status);
+                },
+            })
+        });
+    });
+</script>
+{% endblock domready %}
+{% endblock content %}

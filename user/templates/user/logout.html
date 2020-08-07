@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} User home
+{% endblock title %}
+{% block content %}
+
+<div class="card bg-white container  mt-5 pt-3 pb-3">
+    <h2> You have been logged out</h2>
+    <div class="content_section">
+        <div class="border_top pt-3">
+            <h5 class="text-muted">
+                <a href="{% url 'user:login'%}" class="nav-link">log In Again</a>
+            </h5>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
